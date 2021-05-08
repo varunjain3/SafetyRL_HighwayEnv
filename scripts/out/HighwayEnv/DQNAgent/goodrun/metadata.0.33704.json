@@ -1,0 +1,95 @@
+{
+    "agent": {
+        "__class__": "<class 'rl_agents.agents.deep_q_network.pytorch.DQNAgent'>",
+        "batch_size": 32,
+        "device": "cuda:best",
+        "double": true,
+        "exploration": {
+            "final_temperature": 0.05,
+            "method": "EpsilonGreedy",
+            "tau": 6000,
+            "temperature": 1.0
+        },
+        "gamma": 0.8,
+        "loss_function": "l2",
+        "memory_capacity": 15000,
+        "model": {
+            "advantage": {
+                "layers": [
+                    128
+                ],
+                "out": null,
+                "type": "MultiLayerPerceptron"
+            },
+            "base_module": {
+                "layers": [
+                    256,
+                    128
+                ],
+                "out": null,
+                "type": "MultiLayerPerceptron"
+            },
+            "in": 25,
+            "layers": [
+                256,
+                256
+            ],
+            "out": 5,
+            "type": "DuelingNetwork",
+            "value": {
+                "layers": [
+                    128
+                ],
+                "out": null,
+                "type": "MultiLayerPerceptron"
+            }
+        },
+        "n_steps": 1,
+        "optimizer": {
+            "k": 5,
+            "lr": 0.0005,
+            "type": "ADAM",
+            "weight_decay": 0
+        },
+        "target_update": 50
+    },
+    "env": {
+        "__class__": "<class 'highway_env.envs.highway_env.HighwayEnv'>",
+        "action": {
+            "type": "DiscreteMetaAction"
+        },
+        "centering_position": [
+            0.3,
+            0.5
+        ],
+        "collision_reward": -1,
+        "controlled_vehicles": 1,
+        "duration": 2000,
+        "ego_spacing": 2,
+        "id": "highway-v0",
+        "import_module": "highway_env",
+        "initial_lane_id": null,
+        "lanes_count": 4,
+        "manual_control": false,
+        "observation": {
+            "type": "Kinematics"
+        },
+        "offroad_terminal": false,
+        "offscreen_rendering": false,
+        "other_vehicles_type": "highway_env.vehicle.behavior.IDMVehicle",
+        "policy_frequency": 1,
+        "real_time_rendering": false,
+        "render_agent": true,
+        "reward_speed_range": [
+            20,
+            30
+        ],
+        "scaling": 5.5,
+        "screen_height": 150,
+        "screen_width": 600,
+        "show_trajectories": false,
+        "simulation_frequency": 15,
+        "vehicles_count": 40,
+        "vehicles_density": 1
+    }
+}
