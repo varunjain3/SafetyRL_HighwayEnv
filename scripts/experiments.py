@@ -31,6 +31,8 @@ from rl_agents.trainer import logger
 from rl_agents.trainer.evaluation import Evaluation
 from rl_agents.agents.common.factory import load_agent, load_environment
 
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 BENCHMARK_FILE = 'benchmark_summary'
 LOGGING_CONFIG = 'configs/logging.json'
 VERBOSE_CONFIG = 'configs/verbose.json'
@@ -61,9 +63,10 @@ def evaluate(environment_config, agent_config, options):
     run_directory = None
     if options['--name-from-config']:
         run_directory = "{}_{}_{}".format(Path(agent_config).with_suffix('').name,
-                                  datetime.datetime.now().strftime('%Y%m%d-%H%M%S'),
-                                  os.getpid())
-    options['--seed'] = int(options['--seed']) if options['--seed'] is not None else None
+                                          datetime.datetime.now().strftime('%Y%m%d-%H%M%S'),
+                                          os.getpid())
+    options['--seed'] = int(options['--seed']
+                            ) if options['--seed'] is not None else None
     evaluation = Evaluation(env,
                             agent,
                             run_directory=run_directory,
@@ -99,7 +102,8 @@ def benchmark(options):
     with open(options['<benchmark>']) as f:
         benchmark_config = json.loads(f.read())
     generate_agent_configs(benchmark_config)
-    experiments = product(benchmark_config['environments'], benchmark_config['agents'], [options])
+    experiments = product(
+        benchmark_config['environments'], benchmark_config['agents'], [options])
 
     # Run evaluations
     with Pool(processes=int(options['--processes'])) as pool:
@@ -113,7 +117,8 @@ def benchmark(options):
         BENCHMARK_FILE, datetime.datetime.now().strftime('%Y%m%d-%H%M%S'), os.getpid()))
     with open(benchmark_filename, 'w') as f:
         json.dump(results, f, sort_keys=True, indent=4)
-        gym.logger.info('Benchmark done. Summary written in: {}'.format(benchmark_filename))
+        gym.logger.info(
+            'Benchmark done. Summary written in: {}'.format(benchmark_filename))
 
 
 def generate_agent_configs(benchmark_config, clean=False):
@@ -139,7 +144,8 @@ def generate_agent_configs(benchmark_config, clean=False):
             if clean:
                 [path.unlink() for path in paths]
             else:
-                [json.dump(config, path.open('w')) for config, path in zip(configs, paths)]
+                [json.dump(config, path.open('w'))
+                 for config, path in zip(configs, paths)]
             benchmark_config["agents"] = paths
     return benchmark_config
 
