@@ -1,6 +1,25 @@
 # SafetyRL_HighwayEnv
 
-Applying Constrained Policy Networks on [Highway Environment](https://github.com/eleurent/highway-env)
+Benchmarking Safety Started RL Agents.
+
+```
+configurations-
+Epochs: 160
+Goal: Reaching the green circle, avoiding all hazards
+Agent: Car
+```
+
+### PPO
+
+![PPO on Car](gifs/ppo_160.gif)
+
+### CPO
+
+![CPO on Car](gifs/cpo_160.gif)
+
+## Moving to Higway Environment
+
+Applying Constrained Policy Networks on [Highway Environment](https://github.com/eleurent/highway-env).
 ![Higway Environment](gifs/highway.gif)
 
 ---
