@@ -108,7 +108,7 @@ DQN:
 
 `cd scripts`
 
-`python .\experiments.py evaluate .\configs\HighwayEnv\env_test.json .\configs\HighwayEnv\agents\DQNAgent\ego_attention.json --test --reconver .\out\HighwayEnv\DQNAgent\saved_models\latest.tar`
+`python ./experiments.py evaluate ./configs/HighwayEnv/env_test.json ./configs/HighwayEnv/agents/DQNAgent/ego_attention.json --test --recover-from ./out/HighwayEnv/DQNAgent/saved_models/latest.tar`
 
 CPO:
 
